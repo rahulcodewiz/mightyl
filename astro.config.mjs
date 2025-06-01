@@ -11,8 +11,9 @@ export default defineConfig({
       devSourcemap: true,
     },
   },
-  build: {
-    inlineStylesheets: 'auto',
+    build: {
+    inlineStylesheets: 'never',
+    assets: '_assets'
   },
   server: {
     port: 3000,

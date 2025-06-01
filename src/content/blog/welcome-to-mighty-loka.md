@@ -1,7 +1,7 @@
 ---
 title: "Welcome to Mighty Loka"
 description: "Discover the magical world of children's stories that celebrate Indian culture and values"
-pubDate: "2024-03-20"
+pubDate: 2024-03-20
 tags: ["introduction", "storytelling", "children's books"]
 ---
 

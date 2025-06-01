@@ -1,11 +1,10 @@
 ---
-const base = Astro.base;
 const sections = [
   {
     id: 'author',
     title: 'Author',
     icon: 'fa-pen-fancy',
-    content: `Rashmi is a IT professional, unraveling and sparking innovation, but her soul sings through storytelling, sharing India's timeless heritage with young dreamers. Through Mighty Loka, Rashmi crafts adventures that weave Hindu wisdom into tales young hearts can't resist. She envisions a world where these stories live anew, as thrilling as any superhero saga.`
+    content: `Rashmi is an IT professional, unraveling puzzles and sparking innovation, but her soul sings through storytelling, sharing India's timeless heritage with young dreamers. Through Mighty Loka, Rashmi crafts adventures that weave Hindu wisdom into tales young hearts can't resist. She envisions a world where these stories live anew, as thrilling as any superhero saga.`
   },
   {
     id: 'producer',
@@ -56,22 +55,22 @@ const sections = [
     content: `Rashmi's artistic journey brings a unique visual perspective to her books. Her illustrations blend traditional Indian art elements with modern design, creating a distinctive style that appeals to both children and adults.`,
     gallery: [
       {
-        image: `${base}/images/art1.jpg`,
+        image: '/images/art1.jpg',
         title: 'Diwali Celebrations',
         description: 'Traditional Diwali celebrations in Ayodhya'
       },
       {
-        image: `${base}/images/art2.jpg`,
+        image: '/images/art2.jpg',
         title: 'Hanuman\'s Strength',
         description: 'Depicting Hanuman\'s legendary power'
       },
       {
-        image: `${base}/images/art3.jpg`,
+        image: '/images/art3.jpg',
         title: 'Village Life',
         description: 'Scenes from rural India'
       },
       {
-        image: `${base}/images/art4.jpg`,
+        image: '/images/art4.jpg',
         title: 'Festival Colors',
         description: 'Vibrant festival celebrations'
       }
@@ -95,7 +94,7 @@ const sections = [
       <div class="author-image-section">
         <div class="image-container">
           <img 
-            src='mightyloka/images/author.jpg' 
+            src="/images/author.jpg" 
             alt="Rashmi Mardur" 
             width="400"
             height="600"
