@@ -13,7 +13,7 @@ export default defineConfig({
   },
     build: {
     inlineStylesheets: 'never',
-    assets: '_assets'
+    assets: 'assets'
   },
   server: {
     port: 3000,
