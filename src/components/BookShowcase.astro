@@ -8,13 +8,13 @@ interface Book {
   ageRange: string;
   price: string;
 }
-
+const base = Astro.base;
 // Parse the book data from the provided variable
 const books = [
   {
     title: 'Diwali in Ayodhya: Hanuman’s Magic with Chotu and Chutki',
     description: 'A magical journey through the festival of lights in the ancient city of Ayodhya. Join the celebration as the city comes alive with joy, lights, and the spirit of togetherness.',
-    coverImage: '/images/book1_cover.jpg',
+    coverImage: "mightyloka/images/book1_cover.jpg",
     amazonUrl: 'https://www.amazon.ca/dp/B0FBG4GR2N',
     features: [
       '🌾 Glimpse into Indian Village Life',
