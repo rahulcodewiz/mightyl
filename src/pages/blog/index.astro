@@ -1,0 +1,162 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Get all blog posts
+const posts = await Astro.glob('./*.md');
+const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime());
+---
+
+<Layout title="Blog - Mighty Loka" description="Read the latest stories and insights from Mighty Loka">
+  <Header />
+  
+  <main class="blog-list">
+    <div class="container">
+      <h1>Blog</h1>
+      <p class="subtitle">Stories, insights, and updates from Mighty Loka</p>
+      
+      <div class="posts-grid">
+        {sortedPosts.map(post => (
+          <article class="post-card">
+            <a href={post.url} class="post-link">
+              <div class="post-content">
+                <h2>{post.frontmatter.title}</h2>
+                <p class="post-excerpt">{post.frontmatter.description}</p>
+                <div class="post-meta">
+                  <time datetime={post.frontmatter.pubDate}>
+                    {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <div class="post-tags">
+                    {post.frontmatter.tags.map(tag => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .blog-list {
+    padding: 120px 0 4rem;
+    background: linear-gradient(135deg, var(--background-color) 0%, #f8f9fa 100%);
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 4rem;
+    font-size: 1.2rem;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .post-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+  }
+
+  .post-content {
+    padding: 1.5rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  .post-excerpt {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    .blog-list {
+      padding: 100px 0 3rem;
+    }
+
+    .container {
+      padding: 0 1rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      margin-bottom: 3rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style> 

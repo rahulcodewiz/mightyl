@@ -1,0 +1,187 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="/#books">Books</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#resources">Resources</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Resources</h3>
+        <ul class="footer-links">
+          <!--<li><a href="/reading-guides">Reading Guides</a></li>
+          <li><a href="/activities">Activities</a></li>
+          <li><a href="/blog">Blog</a></li>-->
+          <li><a href="/events">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Legal</h3>
+        <ul class="footer-links">
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <!--
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/cookies">Cookie Policy</a></li>-->
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Contact</h3>
+        <ul class="footer-contact">
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:rashmimardur@gmail.com">rashmimardur@gmail.com</a>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:+17789176412">+1 (778) 917-6412</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        © {currentYear} MightyLoka. All rights reserved.
+      </p>
+      <!--
+      <div class="footer-social">
+        <a href="https://instagram.com/RashmiMardur" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://twitter.com/RashmiMardur" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://facebook.com/RashmiMardur" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>-->
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--text-color);
+    color: white;
+    padding: 4rem 2rem 2rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-title {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--accent-color);
+  }
+
+  .footer-contact {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .footer-contact i {
+    color: var(--accent-color);
+  }
+
+  .footer-contact a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-contact a:hover {
+    color: var(--accent-color);
+  }
+
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .copyright {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-social a {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    color: var(--accent-color);
+  }
+
+  @media (max-width: 768px) {
+    .footer {
+      padding: 3rem 1rem 1.5rem;
+    }
+
+    .footer-content {
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+</style> 

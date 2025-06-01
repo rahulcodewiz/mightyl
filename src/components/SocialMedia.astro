@@ -1,0 +1,312 @@
+---
+const socialLinks = [
+  {
+    platform: 'Instagram',
+    icon: 'instagram',
+    url: 'https://instagram.com/RashmiMardur',
+    color: '#E1306C'
+  },
+  {
+    platform: 'LinkedIn',
+    icon: 'linkedin',
+    url: 'https://facebook.com/RashmiMardur',
+    color: '#4267B2'
+  },
+  {
+    platform: 'YouTube',
+    icon: 'youtube',
+    url: 'https://youtube.com/RashmiMardur',
+    color: '#FF0000'
+  }
+];
+---
+
+<section id="social" class="social-media">
+  <div class="container">
+    <h2 class="section-title">Connect With Me</h2>
+    <p class="section-subtitle">Follow along for updates, behind-the-scenes content, and more!</p>
+    
+    <div class="social-grid">
+      {socialLinks.map(link => (
+        <a 
+          href={link.url}
+          class="social-card"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={`--hover-color: ${link.color}`}
+        >
+          <div class="social-icon">
+            <i class={`fab fa-${link.icon}`}></i>
+          </div>
+          <span class="platform-name">{link.platform}</span>
+        </a>
+      ))}
+    </div>
+
+    <div class="newsletter-signup">
+      <h3>Stay Updated</h3>
+      <p>Subscribe to my newsletter for exclusive content and updates</p>
+      <form class="signup-form" id="newsletter-form">
+        <input 
+          type="text" 
+          placeholder="Enter your email or phone number" 
+          required
+          aria-label="Contact information for newsletter"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[0-9]{10}"
+          title="Please enter a valid email address or 10-digit phone number"
+        />
+        <button type="submit">
+          <span class="button-text">Subscribe</span>
+          <span class="loading-spinner"></span>
+        </button>
+      </form>
+      <div class="form-message"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .social-media {
+    padding: 4rem 2rem;
+    background: var(--background-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 3rem;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+  }
+
+  .social-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .social-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+  }
+
+  .social-card:hover .social-icon {
+    color: var(--hover-color);
+  }
+
+  .platform-name {
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .newsletter-signup {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .newsletter-signup h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  .newsletter-signup p {
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 2rem;
+  }
+
+  .signup-form {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .signup-form input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #eee;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .signup-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+
+  .signup-form button {
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .signup-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .loading-spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .form-message {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: none;
+  }
+
+  .form-message.success {
+    display: block;
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .form-message.error {
+    display: block;
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .signup-form.loading button {
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .signup-form.loading .button-text {
+    display: none;
+  }
+
+  .signup-form.loading .loading-spinner {
+    display: inline-block;
+  }
+
+  .signup-form input:invalid {
+    border-color: #dc3545;
+  }
+
+  .signup-form input:invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    .social-media {
+      padding: 3rem 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .newsletter-signup {
+      padding: 2rem 1rem;
+    }
+
+    .signup-form {
+      flex-direction: column;
+    }
+
+    .signup-form button {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Newsletter form handling
+  const form = document.getElementById('newsletter-form');
+  const formMessage = document.querySelector('.form-message');
+  
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyP986VfeDTuRZ-v3VmY6botCO2Z5j6gElanwU1YiPwDU1f2CFWu3zHI7phNXPt6LcFnQ/exec';
+  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = form.querySelector('input') as HTMLInputElement;
+    const value = input.value;
+    
+    try {
+      form.classList.add('loading');
+      formMessage.className = 'form-message';
+      
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+        body: value,
+      });
+      
+      formMessage.textContent = 'Thank you for subscribing!';
+      formMessage.classList.add('success');
+      form.reset();
+      
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      formMessage.textContent = 'There was an error subscribing. Please try again.';
+      formMessage.classList.add('error');
+    } finally {
+      form.classList.remove('loading');
+    }
+  });
+</script> 
