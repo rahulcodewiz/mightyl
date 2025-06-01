@@ -1,17 +1,18 @@
 ---
+const basePath = '/mightyloka';
 const navItems = [
-  { href: '/', text: 'Home' },
-  { href: '/#books', text: 'Books' },
-  { href: '/#about', text: 'About' },
-  { href: '/blog', text: 'Blog' },
+  { href: `${basePath}/`, text: 'Home' },
+  { href: `${basePath}/#books`, text: 'Books' },
+  { href: `${basePath}/#about`, text: 'About' },
+  { href: `${basePath}/blog`, text: 'Blog' },
   //{ href: '#resources', text: 'Resources' },
-  { href: '/#social', text: 'Contact' }
+  { href: `${basePath}/#social`, text: 'Contact' }
 ];
 ---
 
 <header class="header">
   <nav class="nav-container">
-    <a href="/" class="logo">
+    <a href={`${basePath}/`} class="logo">
       <span class="author-name">Mighty Loka</span>
     </a>
     
