@@ -53,28 +53,31 @@ const sections = [
     title: 'Artist',
     icon: 'fa-palette',
     content: `Rashmi's artistic journey brings a unique visual perspective to her books. Her illustrations blend traditional Indian art elements with modern design, creating a distinctive style that appeals to both children and adults.`,
-    gallery: [
-      {
-        image: '/images/art1.jpg',
-        title: 'Diwali Celebrations',
-        description: 'Traditional Diwali celebrations in Ayodhya'
-      },
-      {
-        image: '/images/art2.jpg',
-        title: 'Hanuman\'s Strength',
-        description: 'Depicting Hanuman\'s legendary power'
-      },
-      {
-        image: '/images/art3.jpg',
-        title: 'Village Life',
-        description: 'Scenes from rural India'
-      },
-      {
-        image: '/images/art4.jpg',
-        title: 'Festival Colors',
-        description: 'Vibrant festival celebrations'
-      }
-    ]
+    instagram: {
+      username: 'mightyloka',
+      feed: [
+        {
+          image: 'https://www.instagram.com/p/C4X2YQNvJKL/media/?size=l',
+          link: 'https://www.instagram.com/p/C4X2YQNvJKL/',
+          caption: 'Latest artwork from our children\'s book series'
+        },
+        {
+          image: 'https://www.instagram.com/p/C4X2YQNvJKL/media/?size=l',
+          link: 'https://www.instagram.com/p/C4X2YQNvJKL/',
+          caption: 'Traditional Indian art meets modern storytelling'
+        },
+        {
+          image: 'https://www.instagram.com/p/C4X2YQNvJKL/media/?size=l',
+          link: 'https://www.instagram.com/p/C4X2YQNvJKL/',
+          caption: 'Behind the scenes of our illustration process'
+        },
+        {
+          image: 'https://www.instagram.com/p/C4X2YQNvJKL/media/?size=l',
+          link: 'https://www.instagram.com/p/C4X2YQNvJKL/',
+          caption: 'Character sketches and development'
+        }
+      ]
+    }
   },
   {
     id: 'mother',
@@ -180,24 +183,44 @@ const sections = [
                   </div>
                 )}
 
-                {section.gallery && (
-                  <div class="art-gallery">
-                    <h4>Art Gallery</h4>
-                    <div class="gallery-grid">
-                      {section.gallery.map(art => (
-                        <div class="gallery-item">
-                          <img 
-                            src={art.image} 
-                            alt={art.title}
-                            loading="lazy"
-                            width="300"
-                            height="200"
-                          />
-                          <div class="gallery-caption">
-                            <h5>{art.title}</h5>
-                            <p>{art.description}</p>
+                {section.instagram && (
+                  <div class="instagram-gallery">
+                    <h4>
+                      <i class="fab fa-instagram"></i> 
+                      Instagram Gallery
+                      <a 
+                        href={`https://www.instagram.com/${section.instagram.username}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="instagram-link"
+                      >
+                        @{section.instagram.username}
+                      </a>
+                    </h4>
+                    <div class="instagram-grid">
+                      {section.instagram.feed.map((post, index) => (
+                        <a 
+                          href={post.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="instagram-item"
+                          data-aos="fade-up"
+                          data-aos-delay={index * 100}
+                        >
+                          <div class="instagram-image">
+                            <img 
+                              src={post.image} 
+                              alt={post.caption}
+                              loading="lazy"
+                              width="300"
+                              height="300"
+                            />
+                            <div class="instagram-overlay">
+                              <i class="fab fa-instagram"></i>
+                            </div>
                           </div>
-                        </div>
+                          <p class="instagram-caption">{post.caption}</p>
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -213,13 +236,14 @@ const sections = [
 
 <style>
   .about-author {
-    padding: 6rem 2rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, var(--background-color) 100%);
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--background-color) 0%, #f8f9fa 100%);
   }
 
   .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
   }
 
   .section-title {
@@ -238,21 +262,19 @@ const sections = [
 
   .about-grid {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 1fr 2fr;
     gap: 3rem;
-    align-items: start;
   }
 
   .author-image-section {
-    position: sticky;
-    top: 2rem;
+    position: relative;
   }
 
   .image-container {
     position: relative;
-    border-radius: 20px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
   }
 
   .image-container img {
@@ -262,36 +284,30 @@ const sections = [
     transition: transform 0.3s ease;
   }
 
-  .image-container:hover img {
-    transform: scale(1.02);
-  }
-
   .image-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     padding: 2rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
     color: white;
-    text-align: center;
   }
 
   .image-overlay h3 {
+    margin: 0;
     font-size: 1.5rem;
-    margin-bottom: 0.5rem;
   }
 
   .image-overlay p {
-    font-size: 1rem;
+    margin: 0.5rem 0;
     opacity: 0.9;
-    margin-bottom: 1rem;
   }
 
   .social-links {
     display: flex;
-    justify-content: center;
     gap: 1rem;
+    margin-top: 1rem;
   }
 
   .social-links a {
@@ -304,13 +320,6 @@ const sections = [
     transform: translateY(-3px);
   }
 
-  .roles-section {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
   .roles-grid {
     display: grid;
     gap: 2rem;
@@ -318,9 +327,9 @@ const sections = [
 
   .role-card {
     background: white;
-    border-radius: 15px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
   }
 
   .role-header {
@@ -329,302 +338,177 @@ const sections = [
     display: flex;
     align-items: center;
     gap: 1rem;
-    background: white;
+    background: none;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
   .role-header:hover {
-    background-color: #f8f9fa;
+    background-color: rgba(0,0,0,0.05);
   }
 
-  .role-header i:first-child {
-    font-size: 1.5rem;
+  .role-header i {
+    font-size: 1.2rem;
     color: var(--primary-color);
   }
 
   .role-header h3 {
-    flex: 1;
-    text-align: left;
-    font-size: 1.25rem;
-    color: var(--text-color);
     margin: 0;
-  }
-
-  .role-header .fa-chevron-down {
-    transition: transform 0.3s ease;
-  }
-
-  .role-header[aria-expanded="true"] .fa-chevron-down {
-    transform: rotate(180deg);
+    flex-grow: 1;
+    text-align: left;
   }
 
   .role-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-out;
-    padding: 0 1.5rem;
-  }
-
-  .role-content.active {
-    max-height: 2000px;
-    padding: 1.5rem;
+    padding: 0 1.5rem 1.5rem;
   }
 
   .role-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-color);
-    opacity: 0.9;
     margin-bottom: 1.5rem;
+    line-height: 1.6;
   }
 
-  .art-gallery {
+  /* Instagram Gallery Styles */
+  .instagram-gallery {
     margin-top: 2rem;
   }
 
-  .art-gallery h4 {
-    font-size: 1.2rem;
+  .instagram-gallery h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
     color: var(--text-color);
-    margin-bottom: 1rem;
   }
 
-  .gallery-grid {
+  .instagram-link {
+    margin-left: auto;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .instagram-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
   }
 
-  .gallery-item {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  .instagram-item {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
   }
 
-  .gallery-item img {
+  .instagram-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .instagram-image {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1;
+  }
+
+  .instagram-image img {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
 
-  .gallery-item:hover img {
+  .instagram-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .instagram-overlay i {
+    color: white;
+    font-size: 2rem;
+  }
+
+  .instagram-item:hover .instagram-overlay {
+    opacity: 1;
+  }
+
+  .instagram-item:hover .instagram-image img {
     transform: scale(1.05);
   }
 
-  .gallery-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: white;
-  }
-
-  .gallery-caption h5 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .gallery-caption p {
+  .instagram-caption {
+    margin-top: 0.5rem;
     font-size: 0.9rem;
-    margin: 0;
-    opacity: 0.9;
-  }
-
-  .experience-section {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #eee;
-  }
-
-  .experience-grid {
-    display: grid;
-    gap: 2rem;
-  }
-
-  .companies-section,
-  .skills-section,
-  .achievements-section {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 10px;
-  }
-
-  .companies-section h4,
-  .skills-section h4,
-  .achievements-section h4 {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-  }
-
-  .companies-section h4 i,
-  .skills-section h4 i,
-  .achievements-section h4 i {
-    color: var(--primary-color);
-  }
-
-  .companies-timeline {
-    display: grid;
-    gap: 1.5rem;
-  }
-
-  .company-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-
-  .company-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  .company-header h5 {
-    font-size: 1.1rem;
-    color: var(--text-color);
-    margin: 0;
-  }
-
-  .period {
-    font-size: 0.9rem;
-    color: var(--primary-color);
-    font-weight: 500;
-  }
-
-  .role {
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-  }
-
-  .company-card p {
-    font-size: 0.95rem;
-    margin: 0;
     color: var(--text-color);
     opacity: 0.8;
+    line-height: 1.4;
   }
 
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .skill-group h5 {
-    font-size: 1rem;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-  }
-
-  .skill-group ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .skill-group li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-    font-size: 0.95rem;
-    color: var(--text-color);
-  }
-
-  .skill-group li i {
-    color: var(--primary-color);
-    font-size: 0.9rem;
-  }
-
-  .achievements-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .achievements-list li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    color: var(--text-color);
-  }
-
-  .achievements-list li i {
-    color: var(--primary-color);
-  }
-
-  @media (max-width: 1024px) {
+  /* Responsive Design */
+  @media (max-width: 992px) {
     .about-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
     }
 
     .author-image-section {
-      position: relative;
-      top: 0;
-      max-width: 500px;
+      max-width: 400px;
       margin: 0 auto;
     }
   }
 
   @media (max-width: 768px) {
-    .about-author {
-      padding: 4rem 1rem;
-    }
-
     .section-title {
       font-size: 2rem;
     }
 
-    .roles-section {
-      padding: 1.5rem;
+    .instagram-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 1rem;
     }
 
-    .image-overlay {
-      padding: 1.5rem;
-    }
-
-    .image-overlay h3 {
-      font-size: 1.3rem;
+    .instagram-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
 
 <script>
-  // Handle expandable sections
-  const roleHeaders = document.querySelectorAll('.role-header');
-  
-  roleHeaders.forEach(header => {
-    header.addEventListener('click', () => {
-      const isExpanded = header.getAttribute('aria-expanded') === 'true';
+  // Toggle role content
+  document.querySelectorAll('.role-header').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling as HTMLElement;
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
       
-      // Close all sections
-      roleHeaders.forEach(h => {
-        h.setAttribute('aria-expanded', 'false');
-        h.nextElementSibling?.classList.remove('active');
-      });
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      if (content) {
+        content.style.display = isExpanded ? 'none' : 'block';
+      }
       
-      // Open clicked section if it was closed
-      if (!isExpanded) {
-        header.setAttribute('aria-expanded', 'true');
-        header.nextElementSibling?.classList.add('active');
+      const icon = button.querySelector('.fa-chevron-down') as HTMLElement;
+      if (icon) {
+        icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
       }
     });
   });
 
-  // Open first section by default
-  roleHeaders[0].click();
+  // Initialize all role contents as hidden except the first one
+  document.querySelectorAll('.role-content').forEach((content, index) => {
+    if (index !== 0 && content instanceof HTMLElement) {
+      content.style.display = 'none';
+    }
+  });
 </script> 
