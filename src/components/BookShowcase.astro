@@ -25,7 +25,7 @@ const books = [
   },{
     title: 'Ramayana for Children',
     description: 'Ramayana is the most important epic of ancient India. It is an account of the life of Rama and his family. On the command of his father, Rama went to exile for fourteen years with his spouse, Sita, and younger brother, Lakshamana. In the forest, Sita was abducted by demon king Ravana. A fierce battle ensued between them.',
-    coverImage: './images/book2-cover.jpg',
+    coverImage: './images/book1-cover.jpg',
     amazonUrl: 'https://www.amazon.ca/Ramayana-Children-Pegasus/dp/813193702X',
     features: [
       '🐒 Storytelling Through Beloved Characters',
@@ -42,10 +42,6 @@ const books = [
     <p class="section-subtitle">Discover the magic of storytelling</p>
 
     <div class="carousel-container">
-      <button class="carousel-button prev" aria-label="Previous book">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-
       <div class="carousel">
         {books.map((book, index) => (
           <div class="book-card" data-index={index}>
@@ -57,6 +53,16 @@ const books = [
                 height="400"
                 loading="lazy"
               />
+              <div class="book-overlay">
+                <a 
+                  href={book.amazonUrl}
+                  class="cta-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fab fa-amazon"></i>
+                </a>
+              </div>
             </div>
             <div class="book-info">
               <h3 class="book-title">{book.title}</h3>
@@ -74,25 +80,11 @@ const books = [
                 </ul>
               </div>
 
-              <div class="book-cta">
-                <a 
-                  href={book.amazonUrl}
-                  class="cta-button"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fab fa-amazon"></i>
-                  Buy on Amazon
-                </a>
-              </div>
+
             </div>
           </div>
         ))}
       </div>
-
-      <button class="carousel-button next" aria-label="Next book">
-        <i class="fas fa-chevron-right"></i>
-      </button>
 
       <div class="carousel-dots">
         {books.map((_, index) => (
@@ -134,7 +126,6 @@ const books = [
 
   .carousel-container {
     position: relative;
-    padding: 0 4rem;
     overflow: hidden;
   }
 
@@ -158,36 +149,7 @@ const books = [
     transition: transform 0.3s ease;
   }
 
-  .carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: white;
-    border: none;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    z-index: 2;
-    transition: all 0.3s ease;
-  }
 
-  .carousel-button:hover {
-    background: var(--primary-color);
-    color: white;
-  }
-
-  .carousel-button.prev {
-    left: 0;
-  }
-
-  .carousel-button.next {
-    right: 0;
-  }
 
   .carousel-dots {
     display: flex;
@@ -219,10 +181,8 @@ const books = [
     transition: transform 0.3s ease;
     width: 100%;
     max-width: 300px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 6rem auto;
+    display: inline-block;
     background: transparent;
   }
 
@@ -232,10 +192,20 @@ const books = [
     display: block;
     object-fit: contain;
     background: transparent;
+    position: relative;
+    z-index: 1;
   }
 
   .book-cover:hover {
     transform: translateY(-5px);
+  }
+
+  .book-overlay {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
   }
 
   .book-info {
@@ -286,25 +256,33 @@ const books = [
     color: var(--primary-color);
   }
 
-  .book-cta {
-    margin-top: auto;
-  }
+
 
   .cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50px;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: white;
+    color: var(--primary-color);
+    border-radius: 25px;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 2px solid var(--primary-color);
   }
 
   .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .cta-button i {
+    font-size: 1.2em;
   }
 
   @media (max-width: 968px) {
@@ -315,6 +293,20 @@ const books = [
 
     .book-cover {
       max-width: 250px;
+    }
+
+    .book-overlay {
+      bottom: 10%;
+    }
+
+    .cta-button {
+      padding: 0.6rem 1rem;
+      font-size: 0.75rem;
+      gap: 0.4rem;
+    }
+
+    .cta-button i {
+      font-size: 1.1em;
     }
   }
 
@@ -335,14 +327,7 @@ const books = [
       font-size: 1rem;
     }
 
-    .carousel-container {
-      padding: 0 3rem;
-    }
 
-    .carousel-button {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
   }
 </style>
 
@@ -351,8 +336,6 @@ const books = [
   const carousel = document.querySelector('.carousel') as HTMLElement;
   const cards = document.querySelectorAll('.book-card');
   const dots = document.querySelectorAll('.carousel-dot');
-  const prevButton = document.querySelector('.carousel-button.prev');
-  const nextButton = document.querySelector('.carousel-button.next');
   
   let currentIndex = 0;
   const totalCards = cards.length;
@@ -384,15 +367,7 @@ const books = [
     updateCarousel();
   }
 
-  // Event listeners
-  if (prevButton) {
-    prevButton.addEventListener('click', prevSlide);
-  }
-  
-  if (nextButton) {
-    nextButton.addEventListener('click', nextSlide);
-  }
-
+  // Event listeners for dots
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => goToSlide(index));
   });

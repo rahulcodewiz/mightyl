@@ -1,0 +1,162 @@
+---
+// Official Instagram Embed Widget Component
+// No API tokens needed - uses Instagram's official embed system
+---
+
+<div class="instagram-section">
+  <h4>
+    <i class="fab fa-instagram"></i> 
+    Latest Artwork from Instagram
+  </h4>
+  
+  <div class="instagram-embed-container">
+    <!-- Instagram Feed Embed - Official Widget 
+    <blockquote 
+      class="instagram-media" 
+      data-instgrm-captioned 
+      data-instgrm-permalink="https://www.instagram.com/buddingbrushesatelier/" 
+      data-instgrm-version="14"
+      style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"
+    >
+      <div style="padding:16px;">
+    
+        
+        <p style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">
+          <a href="https://www.instagram.com/buddingbrushesatelier/" style="color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">
+            Visit @buddingbrushesatelier on Instagram
+          </a>
+        </p>
+      </div>
+    </blockquote>
+    -->
+    <!-- Alternative: Simple Instagram Profile Link Card -->
+    <div class="instagram-profile-card">
+      <div class="profile-header">
+        <div class="profile-icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <div class="profile-info">
+          <h5>@buddingbrushesatelier</h5>
+        </div>
+      </div>
+      <a 
+        href="https://www.instagram.com/buddingbrushesatelier/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="follow-button"
+      >
+        Follow on Instagram
+      </a>
+    </div>
+  </div>
+  
+  <!-- Instagram embed script -->
+  <script async src="//www.instagram.com/embed.js"></script>
+</div>
+
+<style>
+  .instagram-section {
+    margin-top: 2rem;
+  }
+
+  .instagram-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.2rem;
+  }
+
+  .instagram-section h4 i {
+    color: #E4405F;
+    font-size: 1.3rem;
+  }
+
+  .instagram-link {
+    margin-left: auto;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .instagram-link:hover {
+    text-decoration: underline;
+  }
+
+  .instagram-embed-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .instagram-media {
+    margin: 0 auto !important;
+  }
+
+  .instagram-profile-card {
+    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    color: white;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+
+  .profile-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .profile-info h5 {
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+  }
+
+  .profile-info p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.95rem;
+  }
+
+  .follow-button {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+
+  .follow-button:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  @media (max-width: 768px) {
+    .instagram-profile-card {
+      padding: 1.5rem;
+      margin: 0 1rem;
+    }
+    
+    .profile-icon {
+      font-size: 2.5rem;
+    }
+    
+    .profile-info h5 {
+      font-size: 1.2rem;
+    }
+  }
+</style> 

@@ -1,4 +1,6 @@
 ---
+import InstagramEmbed from './InstagramEmbed.astro';
+
 const sections = [
   {
     id: 'author',
@@ -12,22 +14,7 @@ const sections = [
     icon: 'fa-film',
     content: `Product Owner with a background in Agile product development(CSPO, Safe Agile, Agile certified), API design, and cross-functional stakeholder collaboration, delivering impactful platforms at companies like Lululemon, American Express, CVS Health, CGI Information Systems and Imperva. Proven track record in launching enterprise products, streamlining security processes, and driving data informed decisions that reduced costs, improved compliance, and accelerated delivery timelines`,
     experience: {
-      
-      companies: [
-        /*
-        {
-          name: 'Mighty Loka',
-          role: 'Founder & Creative Director',
-          period: '2023 - Present',
-          description: 'Leading the creative vision and production of children\'s books that celebrate Indian culture and values.'
-        },
-        {
-          name: 'Previous Company',
-          role: 'Senior IT Professional',
-          period: '2018 - 2023',
-          description: 'Led innovative projects and teams in the technology sector.'
-        }*/
-      ],
+      companies: [],
       skills: [
         {
           category: 'Creative',
@@ -45,7 +32,7 @@ const sections = [
       achievements: [
         'Launched American Express ONEDATA platform, defining Swagger-based APIs ,resulting in real time catalog access reducing build time by 45% and saving $2M in integration costs.',
         'Owned Lululemons Digital Vulnerability Platform, resolving 1,300+ security issues in 3 months, boosting resolution rates by 40% through stakeholder-aligned roadmaps.',
-'Authored 60+ user stories for a Github-to-Gitlab migration, streamlining 3,500+ repositories and onboarding 30+ security teams.',
+        'Authored 60+ user stories for a Github-to-Gitlab migration, streamlining 3,500+ repositories and onboarding 30+ security teams.',
         'Delivered 12 on-schedule releases at Lululemon, achieving 90% sprint goal completion via effective backlog management in Jira.'
       ]
     }
@@ -55,29 +42,7 @@ const sections = [
     title: 'Artist',
     icon: 'fa-palette',
     content: `Rashmi's artistic journey brings a unique visual perspective to her books. Her illustrations blend traditional Indian art elements with modern design, creating a distinctive style that appeals to both children and adults.`,
-    gallery: [
-      /*
-      {
-        image: '/images/art1.jpg',
-        title: 'Diwali Celebrations',
-        description: 'Traditional Diwali celebrations in Ayodhya'
-      },
-      {
-        image: '/images/art2.jpg',
-        title: 'Hanuman\'s Strength',
-        description: 'Depicting Hanuman\'s legendary power'
-      },
-      {
-        image: '/images/art3.jpg',
-        title: 'Village Life',
-        description: 'Scenes from rural India'
-      },
-      {
-        image: '/images/art4.jpg',
-        title: 'Festival Colors',
-        description: 'Vibrant festival celebrations'
-      }*/
-    ]
+    showInstagram: true
   },
   {
     id: 'mother',
@@ -140,16 +105,7 @@ const sections = [
                       <div class="companies-section">
                         <h4><i class="fas fa-building"></i> Professional Journey</h4>
                         <div class="companies-timeline">
-                          {section.experience.companies.map(company => (
-                            <div class="company-card">
-                              <div class="company-header">
-                                <h5>{company.name}</h5>
-                                <span class="period">{company.period}</span>
-                              </div>
-                              <div class="role">{company.role}</div>
-                              <p>{company.description}</p>
-                            </div>
-                          ))}
+                          <p>Professional experience across leading technology companies including Lululemon, American Express, CVS Health, CGI Information Systems, and Imperva.</p>
                         </div>
                       </div>
 
@@ -187,28 +143,11 @@ const sections = [
                   </div>
                 )}
 
-                {section.gallery && (
-                  <div class="art-gallery">
-                    <h4>Art Gallery</h4>
-                    <div class="gallery-grid">
-                      {section.gallery.map(art => (
-                        <div class="gallery-item">
-                          <img 
-                            src={art.image} 
-                            alt={art.title}
-                            loading="lazy"
-                            width="300"
-                            height="200"
-                          />
-                          <div class="gallery-caption">
-                            <h5>{art.title}</h5>
-                            <p>{art.description}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                {section.showInstagram && (
+                  <InstagramEmbed />
                 )}
+
+
               </div>
             </div>
           ))}
@@ -225,7 +164,7 @@ const sections = [
   }
 
   .container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
@@ -633,5 +572,7 @@ const sections = [
   });
 
   // Open first section by default
-  roleHeaders[0].click();
+  if (roleHeaders[0]) {
+    (roleHeaders[0] as HTMLElement).click();
+  }
 </script> 

@@ -138,6 +138,11 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
 
   .tag {
     color: var(--primary-color);
+    padding: 0.25rem 0.5rem;
+    background: rgba(var(--primary-color-rgb, 75, 85, 99), 0.1);
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.8rem;
   }
 
   @media (max-width: 768px) {
