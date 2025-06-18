@@ -1,0 +1,80 @@
+<div class="left-garland">
+  🌸
+  🌺
+  🌼
+  🌸
+  🌺
+  🌼
+  🌸
+  🌺
+  🌼
+  🌸
+</div>
+
+<div class="right-garland">
+  🌸
+  🌺
+  🌼
+  🌸
+  🌺
+  🌼
+  🌸
+  🌺
+  🌼
+  🌸
+</div>
+
+<div class="border left-border"></div>
+<div class="border right-border"></div>
+
+<style>
+  .left-garland, .right-garland {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2rem;
+    z-index: 9999;
+    pointer-events: none;
+    filter: sepia(100%) saturate(50%);
+  }
+
+  .left-garland {
+    left: 20px;
+  }
+
+  .right-garland {
+    right: 20px;
+  }
+
+  .border {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 4px;
+    background-color: #D4B483;
+    z-index: 9999;
+  }
+
+  .left-border {
+    left: 0;
+  }
+
+  .right-border {
+    right: 0;
+  }
+
+  @media (max-width: 768px) {
+    .left-garland, .right-garland {
+      width: 40px;
+      font-size: 1.5rem;
+    }
+    .border {
+      width: 3px;
+    }
+  }
+</style> 
