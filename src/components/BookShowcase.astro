@@ -12,6 +12,19 @@ interface Book {
 // Parse the book data from the provided variable
 const books = [
   {
+    title: 'Hanuman\'s Journey to the Sun',
+    description: 'Unlike man-made superheroes, this Hanuman\'s story is rooted in faith, culture, and values that have inspired generations! Long before Superman or Batman, there was a real hero whose courage knew no bounds. Hanuman, the fearless child with a heart full of devotion and the strength to touch the Sun. Hanuman\'s Journey to the Sun brings to life one of the most powerful and lesser-known tales from Indian history',
+    coverImage: './images/book2-cover.svg',
+    amazonUrl: 'https://a.co/d/67BRpTy',
+    features: [
+      '🐒 Illustrated to captivate young minds and imaginations',
+      '❤️ Cultural Preservation about ancient story of Surya and Hanuman',
+      '📚 A true tale that\'s more inspiring than any fantasy',
+      '🤔 Courage and curiosity',
+      'Perfect for ages 4-11'
+    ]
+  },
+  {
     title: 'Diwali in Ayodhya: Hanuman Magic with Chotu and Chutki',
     description: 'A magical journey through the festival of lights in the ancient city of Ayodhya. Join the celebration as the city comes alive with joy, lights, and the spirit of togetherness.',
     coverImage: './images/book1-cover.jpg',
@@ -20,16 +33,6 @@ const books = [
       '🌾 Glimpse into Indian Village Life',
       '🐒 Storytelling Through Beloved Characters- Chotu & Chutki',
       '❤️ Cultural Preservation about Diwali, Rama, Hanuman',
-      'Perfect for ages 4-11'
-    ]
-  },{
-    title: 'Hanuman\'s Journey to the Sun',
-    description: 'This is a story of a boy named Hanuman whose devotion became a timeless practice Surya Numaskara. Follow Chotu and Chutki as they discover the meaning behind the morning sun through love, movement, and myth.',
-    coverImage: './images/book2-cover.svg',
-    amazonUrl: '.',
-    features: [
-      '🐒 Storytelling Through Beloved Characters',
-      '❤️ Cultural Preservation about ancient story of Surya and Hanuman',
       'Perfect for ages 4-11'
     ]
   }
@@ -73,7 +76,6 @@ const books = [
                 <ul>
                   {book.features.map(feature => (
                     <li>
-                      <i class="fas fa-check"></i>
                       {feature}
                     </li>
                   ))}
