@@ -379,7 +379,7 @@ const books = [
   dots[0].classList.add('active');
 
   // Optional: Auto-advance slides every 5 seconds
-  let autoSlideInterval = setInterval(nextSlide, 5000);
+  let autoSlideInterval = setInterval(nextSlide, 15000);
 
   // Pause auto-advance when hovering over carousel
   if (carousel) {
@@ -388,7 +388,7 @@ const books = [
     });
 
     carousel.addEventListener('mouseleave', () => {
-      autoSlideInterval = setInterval(nextSlide, 5000);
+      autoSlideInterval = setInterval(nextSlide, 15000);
     });
   }
 </script> 
