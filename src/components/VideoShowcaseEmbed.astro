@@ -1,0 +1,461 @@
+---
+interface Video {
+  id: string;
+  title: string;
+  youtubeUrl: string;
+  duration: string;
+  views: string;
+}
+
+// Function to extract video ID from YouTube URL
+function getYouTubeVideoId(url: string): string {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|shorts\/|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : '';
+}
+
+// Function to generate embed URL from video ID
+function getYouTubeEmbedUrl(videoId: string): string {
+  return `https://www.youtube.com/embed/${videoId}`;
+}
+
+// Sample YouTube video data - just add your YouTube URLs
+const videos = [
+  {
+    id: 'video1',
+    title: 'Storytelling Session: Hanuman\'s Journey',
+    youtubeUrl: 'https://www.youtube.com/shorts/79nG41ub0IU',
+    duration: '12:45',
+    views: '2.3K'
+  }
+];
+
+// Generate embed URLs automatically
+const videosWithEmbeds = videos.map(video => ({
+  ...video,
+  embedUrl: getYouTubeEmbedUrl(getYouTubeVideoId(video.youtubeUrl))
+}));
+
+// Group videos into pages of 3
+const videosPerPage = 3;
+const videoPages = [];
+for (let i = 0; i < videosWithEmbeds.length; i += videosPerPage) {
+  videoPages.push(videosWithEmbeds.slice(i, i + videosPerPage));
+}
+---
+
+<section id="videos" class="video-showcase">
+  <div class="container">
+    <h2 class="section-title">Featured Videos</h2>
+    <p class="section-subtitle">Stories come alive through video</p>
+
+    <div class="video-carousel-container">
+      <div class="video-carousel">
+        {videoPages.map((page, pageIndex) => (
+          <div class="video-page" data-page={pageIndex}>
+            <div class="video-grid">
+              {page.map((video) => (
+                <div class="video-tile">
+                  <div class="video-embed">
+                    <iframe
+                      src={video.embedUrl}
+                      title={video.title}
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                      loading="lazy"
+                    ></iframe>
+                  </div>
+                  <div class="video-info">
+                    <h3 class="video-title">{video.title}</h3>
+                    <div class="video-stats">
+                      <span class="views">
+                        <i class="fas fa-eye"></i>
+                        {video.views} views
+                      </span>
+                      <span class="duration">
+                        <i class="fas fa-clock"></i>
+                        {video.duration}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Netflix-style navigation arrows -->
+      <div class="video-carousel-navigation">
+        <button 
+          class="video-nav-arrow video-nav-prev"
+          aria-label="Previous videos"
+          title="Previous videos"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="video-page-indicators">
+          {videoPages.map((page, index) => (
+            <button 
+              class="video-page-dot" 
+              data-page-index={index}
+              aria-label={`Go to page ${index + 1}`}
+              title={`Page ${index + 1}`}
+            >
+            </button>
+          ))}
+        </div>
+        
+        <button 
+          class="video-nav-arrow video-nav-next"
+          aria-label="Next videos"
+          title="Next videos"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wavy-divider"></div>
+
+<style>
+  .video-showcase {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, var(--background-color) 0%, #f8f9fa 100%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 3rem;
+  }
+
+  .video-carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-carousel {
+    display: flex;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+  }
+
+  .video-page {
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  .video-tile {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .video-tile:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .video-embed {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-info {
+    padding: 1.5rem;
+  }
+
+  .video-title {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  .video-stats {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+
+  .video-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .video-stats i {
+    color: var(--primary-color);
+  }
+
+  /* Netflix-style Navigation */
+  .video-carousel-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .video-nav-arrow {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .video-nav-arrow:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+  }
+
+  .video-nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: scale(1);
+    background: #f5f5f5;
+    border-color: #ddd;
+    color: #999;
+    box-shadow: none;
+  }
+
+  .video-nav-arrow:disabled:hover {
+    background: #f5f5f5;
+    color: #999;
+    transform: scale(1);
+  }
+
+  .video-page-indicators {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .video-page-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .video-page-dot:hover {
+    background: var(--primary-color);
+    transform: scale(1.2);
+  }
+
+  .video-page-dot.active {
+    background: var(--primary-color);
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 968px) {
+    .video-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .video-carousel-navigation {
+      gap: 1.5rem;
+    }
+
+    .video-nav-arrow {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .video-page-dot {
+      width: 0.6rem;
+      height: 0.6rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .video-showcase {
+      padding: 4rem 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .video-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .video-title {
+      font-size: 1.1rem;
+    }
+
+    .video-carousel-navigation {
+      gap: 1rem;
+      flex-direction: column;
+    }
+
+    .video-nav-arrow {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .video-page-indicators {
+      order: -1;
+      margin-bottom: 1rem;
+    }
+
+    .video-page-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+  }
+</style>
+
+<script define:vars={{ videoPages }}>
+  // Video page data is now passed from the frontmatter
+  const videoPageData = videoPages;
+
+  // Carousel functionality
+  const videoCarousel = document.querySelector('.video-carousel');
+  const videoPageElements = document.querySelectorAll('.video-page');
+  const prevButton = document.querySelector('.video-nav-prev');
+  const nextButton = document.querySelector('.video-nav-next');
+  const pageDots = document.querySelectorAll('.video-page-dot');
+  
+  let currentPageIndex = 0;
+  const totalPages = videoPageElements.length;
+
+  function updateVideoCarousel() {
+    if (!videoCarousel) return;
+    
+    // Update carousel position
+    videoCarousel.style.transform = `translateX(-${currentPageIndex * 100}%)`;
+    
+    // Update page dots
+    pageDots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentPageIndex);
+    });
+    
+    // Update arrow button states
+    if (prevButton) {
+      prevButton.disabled = currentPageIndex === 0;
+    }
+    if (nextButton) {
+      nextButton.disabled = currentPageIndex === totalPages - 1;
+    }
+  }
+
+  function goToPage(index) {
+    currentPageIndex = index;
+    updateVideoCarousel();
+  }
+
+  function nextPage() {
+    if (currentPageIndex < totalPages - 1) {
+      currentPageIndex = currentPageIndex + 1;
+      updateVideoCarousel();
+    }
+  }
+
+  function prevPage() {
+    if (currentPageIndex > 0) {
+      currentPageIndex = currentPageIndex - 1;
+      updateVideoCarousel();
+    }
+  }
+
+  // Event listeners for page dots with auto-advance pause
+  pageDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      goToPage(index);
+    });
+  });
+
+  // Event listeners for arrow buttons
+  if (prevButton) {
+    prevButton.addEventListener('click', () => {
+      prevPage();
+    });
+  }
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
+      nextPage();
+    });
+  }
+
+  // Initialize first dot as active and update arrows
+  if (pageDots.length > 0) {
+    pageDots[0].classList.add('active');
+  }
+  updateVideoCarousel();
+
+  // Keyboard navigation for video carousel
+  document.addEventListener('keydown', (e) => {
+    if (e.target.closest('.video-showcase')) {
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          prevPage();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          nextPage();
+          break;
+      }
+    }
+  });
+</script>

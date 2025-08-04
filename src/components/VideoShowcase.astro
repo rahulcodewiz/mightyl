@@ -1,0 +1,637 @@
+---
+interface Video {
+  title: string;
+  youtubeUrl: string;
+}
+
+// Function to extract video ID from YouTube URL
+function getYouTubeVideoId(url: string): string {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|shorts\/|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : '';
+}
+
+// Function to generate thumbnail URL from video ID
+function getYouTubeThumbnail(videoId: string): string {
+  return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+}
+
+// Function to determine video type from URL
+function getVideoType(url: string): string {
+  if (url.includes('/shorts/')) {
+    return 'Short';
+  } else if (url.includes('watch?v=')) {
+    return 'Video';
+  }
+  return 'Video';
+}
+
+// Sample YouTube video data - just add your YouTube URLs
+const videos = [
+  {
+    title: 'Sun Salutation- Premier',
+    youtubeUrl: 'https://www.youtube.com/shorts/79nG41ub0IU'
+  }
+];
+
+// Generate thumbnails and video types automatically
+const videosWithThumbnails = videos.map(video => ({
+  ...video,
+  thumbnail: getYouTubeThumbnail(getYouTubeVideoId(video.youtubeUrl)),
+  videoType: getVideoType(video.youtubeUrl)
+}));
+
+// Group videos into pages of 3
+const videosPerPage = 3;
+const videoPages = [];
+for (let i = 0; i < videosWithThumbnails.length; i += videosPerPage) {
+  videoPages.push(videosWithThumbnails.slice(i, i + videosPerPage));
+}
+---
+
+<section id="videos" class="video-showcase">
+  <div class="container">
+    <h2 class="section-title">Featured Videos</h2>
+    <p class="section-subtitle">Stories come alive through video</p>
+
+    <div class="video-carousel-container">
+      <div class="video-carousel">
+        {videoPages.map((page, pageIndex) => (
+          <div class="video-page" data-page={pageIndex}>
+            <div class="video-grid">
+              {page.map((video) => (
+                <a 
+                  href={video.youtubeUrl}
+                  class="video-tile"
+                  data-video-type={video.videoType.toLowerCase()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Watch ${video.title}`}
+                >
+                  <div class="video-thumbnail">
+                    <img 
+                      src={video.thumbnail} 
+                      alt={`Thumbnail for ${video.title}`}
+                      width="400"
+                      height="225"
+                      loading="lazy"
+                    />
+                    <div class="video-overlay">
+                      <div class="play-icon">
+                        <i class="fas fa-play"></i>
+                      </div>
+                    </div>
+                    
+                    <!-- Title overlay (bottom) -->
+                    <div class="video-title-overlay">
+                      <h3 class="video-title">{video.title}</h3>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Netflix-style navigation arrows -->
+      <div class="video-carousel-navigation">
+        <button 
+          class="video-nav-arrow video-nav-prev"
+          aria-label="Previous videos"
+          title="Previous videos"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="video-page-indicators">
+          {videoPages.map((page, index) => (
+            <button 
+              class="video-page-dot" 
+              data-page-index={index}
+              aria-label={`Go to page ${index + 1}`}
+              title={`Page ${index + 1}`}
+            >
+            </button>
+          ))}
+        </div>
+        
+        <button 
+          class="video-nav-arrow video-nav-next"
+          aria-label="Next videos"
+          title="Next videos"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Swipe hint for mobile -->
+        <div class="video-swipe-hint">
+          <i class="fas fa-hand-point-left"></i>
+          <span>Swipe to explore more videos</span>
+          <i class="fas fa-hand-point-right"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wavy-divider"></div>
+
+<style>
+  .video-showcase {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, var(--background-color) 0%, #f8f9fa 100%);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 3rem;
+  }
+
+  .video-carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-carousel {
+    display: flex;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+  }
+
+  .video-page {
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+
+  .video-tile {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .video-tile:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .video-thumbnail {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  /* Default aspect ratio for Videos */
+  .video-thumbnail {
+    aspect-ratio: 16/9;
+  }
+
+  /* Shorts get a different aspect ratio and styling */
+  .video-tile[data-video-type="short"] .video-thumbnail {
+    aspect-ratio: 9/16;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .video-tile[data-video-type="short"] {
+    justify-self: center;
+  }
+
+  .video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .video-tile:hover .video-thumbnail img {
+    transform: scale(1.05);
+  }
+
+  .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .video-tile:hover .video-overlay {
+    opacity: 1;
+  }
+
+  .play-icon {
+    width: 4rem;
+    height: 4rem;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+  }
+
+  .video-tile:hover .play-icon {
+    transform: scale(1);
+  }
+
+  /* Title overlay (bottom) */
+  .video-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 2rem 1rem 1rem 1rem;
+    z-index: 2;
+  }
+
+  .video-title {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Netflix-style Navigation */
+  .video-carousel-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .video-nav-arrow {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .video-nav-arrow:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+  }
+
+  .video-nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: scale(1);
+    background: #f5f5f5;
+    border-color: #ddd;
+    color: #999;
+    box-shadow: none;
+  }
+
+  .video-nav-arrow:disabled:hover {
+    background: #f5f5f5;
+    color: #999;
+    transform: scale(1);
+  }
+
+  .video-page-indicators {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .video-page-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .video-page-dot:hover {
+    background: var(--primary-color);
+    transform: scale(1.2);
+  }
+
+  .video-page-dot.active {
+    background: var(--primary-color);
+    transform: scale(1.3);
+  }
+
+  /* Swipe Hint */
+  .video-swipe-hint {
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+  }
+
+  .video-swipe-hint i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  @media (max-width: 968px) {
+    .video-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .video-tile[data-video-type="short"] .video-thumbnail {
+      max-width: 250px;
+    }
+
+    .video-title {
+      font-size: 0.9rem;
+    }
+
+    .video-carousel-navigation {
+      gap: 1.5rem;
+    }
+
+    .video-nav-arrow {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .video-page-dot {
+      width: 0.6rem;
+      height: 0.6rem;
+    }
+
+    .video-swipe-hint {
+      display: flex;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .video-showcase {
+      padding: 4rem 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .video-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .video-tile[data-video-type="short"] .video-thumbnail {
+      max-width: 200px;
+    }
+
+    .video-title {
+      font-size: 0.85rem;
+    }
+
+    .video-carousel-navigation {
+      gap: 1rem;
+      flex-direction: column;
+    }
+
+    .video-nav-arrow {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .video-page-indicators {
+      order: -1;
+      margin-bottom: 1rem;
+    }
+
+    .video-page-dot {
+      width: 0.5rem;
+      height: 0.5rem;
+    }
+
+    .video-swipe-hint {
+      font-size: 0.8rem;
+      gap: 0.5rem;
+      order: 1;
+    }
+  }
+</style>
+
+<script define:vars={{ videoPages }}>
+  // Video page data is now passed from the frontmatter
+  const videoPageData = videoPages;
+
+  // Carousel functionality
+  const videoCarousel = document.querySelector('.video-carousel');
+  const videoPageElements = document.querySelectorAll('.video-page');
+  const prevButton = document.querySelector('.video-nav-prev');
+  const nextButton = document.querySelector('.video-nav-next');
+  const pageDots = document.querySelectorAll('.video-page-dot');
+  
+  let currentPageIndex = 0;
+  const totalPages = videoPageElements.length;
+
+  function updateVideoCarousel() {
+    if (!videoCarousel) return;
+    
+    // Update carousel position
+    videoCarousel.style.transform = `translateX(-${currentPageIndex * 100}%)`;
+    
+    // Update page dots
+    pageDots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentPageIndex);
+    });
+    
+    // Update arrow button states
+    if (prevButton) {
+      prevButton.disabled = currentPageIndex === 0;
+    }
+    if (nextButton) {
+      nextButton.disabled = currentPageIndex === totalPages - 1;
+    }
+  }
+
+  function goToPage(index) {
+    currentPageIndex = index;
+    updateVideoCarousel();
+  }
+
+  function nextPage() {
+    if (currentPageIndex < totalPages - 1) {
+      currentPageIndex = currentPageIndex + 1;
+      updateVideoCarousel();
+    }
+  }
+
+  function prevPage() {
+    if (currentPageIndex > 0) {
+      currentPageIndex = currentPageIndex - 1;
+      updateVideoCarousel();
+    }
+  }
+
+  // Auto-advance functionality with loop
+  function autoNextPage() {
+    currentPageIndex = (currentPageIndex + 1) % totalPages;
+    updateVideoCarousel();
+  }
+
+  // Auto-advance pages every 12 seconds
+  let autoPageInterval = setInterval(autoNextPage, 12000);
+
+  // Pause auto-advance when hovering over carousel
+  function pauseAutoPage() {
+    clearInterval(autoPageInterval);
+  }
+
+  function resumeAutoPage() {
+    autoPageInterval = setInterval(autoNextPage, 12000);
+  }
+
+  if (videoCarousel) {
+    videoCarousel.addEventListener('mouseenter', pauseAutoPage);
+    videoCarousel.addEventListener('mouseleave', resumeAutoPage);
+  }
+
+  // Event listeners for page dots with auto-advance pause
+  pageDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      goToPage(index);
+      pauseAutoPage();
+      setTimeout(resumeAutoPage, 8000);
+    });
+  });
+
+  // Event listeners for arrow buttons with auto-advance pause
+  if (prevButton) {
+    prevButton.addEventListener('click', () => {
+      prevPage();
+      pauseAutoPage();
+      setTimeout(resumeAutoPage, 8000);
+    });
+  }
+  if (nextButton) {
+    nextButton.addEventListener('click', () => {
+      nextPage();
+      pauseAutoPage();
+      setTimeout(resumeAutoPage, 8000);
+    });
+  }
+
+  // Initialize first dot as active and update arrows
+  if (pageDots.length > 0) {
+    pageDots[0].classList.add('active');
+  }
+  updateVideoCarousel();
+
+  // Keyboard navigation for video carousel
+  document.addEventListener('keydown', (e) => {
+    if (e.target.closest('.video-showcase')) {
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          prevPage();
+          pauseAutoPage();
+          setTimeout(resumeAutoPage, 8000);
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          nextPage();
+          pauseAutoPage();
+          setTimeout(resumeAutoPage, 8000);
+          break;
+      }
+    }
+  });
+
+  // Touch/Swipe support for mobile
+  let videoTouchStartX = 0;
+  let videoTouchEndX = 0;
+  let videoTouchStartY = 0;
+  let videoTouchEndY = 0;
+
+  if (videoCarousel) {
+    videoCarousel.addEventListener('touchstart', (e) => {
+      videoTouchStartX = e.changedTouches[0].screenX;
+      videoTouchStartY = e.changedTouches[0].screenY;
+    });
+
+    videoCarousel.addEventListener('touchend', (e) => {
+      videoTouchEndX = e.changedTouches[0].screenX;
+      videoTouchEndY = e.changedTouches[0].screenY;
+      
+      // Check if it's a horizontal swipe (not vertical scroll)
+      const horizontalDistance = Math.abs(videoTouchEndX - videoTouchStartX);
+      const verticalDistance = Math.abs(videoTouchEndY - videoTouchStartY);
+      
+      if (horizontalDistance > verticalDistance && horizontalDistance > 50) {
+        if (videoTouchEndX < videoTouchStartX) {
+          // Swipe left - go to next
+          nextPage();
+        } else {
+          // Swipe right - go to previous
+          prevPage();
+        }
+        pauseAutoPage();
+        setTimeout(resumeAutoPage, 8000);
+      }
+    });
+  }
+</script>
