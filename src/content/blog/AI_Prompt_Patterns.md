@@ -57,13 +57,20 @@ Construct the prompt structure, avoid vague and leghty sentence. Use points Meth
 >- Maintain her calm, wise expression and graceful village backdrop    
 >**_Prompt: Pixar-style 3D semi-realistic, graceful white Indian cow with a pleasant, soft face, soulful brown eyes._** 
 
+<img src="cow.png" alt="Pixar-style 3D Cow Character" style="width: 70%; height: auto%;">
 
 Reuse the same character description for each prompt.
 If an illustration is slightly off, regenerate up to 3–4 times before rewriting the prompt
 
 ## 2 AI Prompt for Illustration
 
-**2.1 Prompting Patterns**
+**2.1 Use Create Image in ChatGPT**
+
+Create images by providing a description, selecting the 'Create image' option, and running the prompt. To ensure consistency across designs, use AI editing features to refine or update images as needed.
+
+![Create Image Option in ChatGPT](create_image_option.png)
+
+**2.2 Prompting Patterns**
 
 Draft the prompt with all the specifications like:
 - Style: Pixar-style 3D .
@@ -73,13 +80,12 @@ Draft the prompt with all the specifications like:
 - Mention clothing, colors, or features repeatedly for consistency. Repeat these key identifiers across all the prompts.
 - If image/illustrations isnt right, tweak style or action first.
 - Finally use these to structure the Prompt 
-- **_Example: Pixar-style 3D illustration. White cow walking on a forest path at twilight. The cow looks sad, head lowered. Soft golden light filters through tall trees._**
+- **_Example: Pixar-style 3D illustration of a sad white cow walking on a forest path at twilight, with soft golden light filtering through tall trees, exactly matching the instructions above._**
 
-![Sad White Cow Walking in Forest at Twilight](./images/sample-pages/book1-page1.png)
-
-*Example of a Pixar-style 3D illustration: A sad white cow walking on a forest path at twilight, with soft golden light filtering through tall trees - exactly matching the prompt example above*
+![Sad White Cow Walking in Forest at Twilight](Cow_Sad.png)
 
 ## References
 
 - **OpenAI ChatGPT**: [chat.openai.com](https://chat.openai.com) - Primary AI tool for illustration prompts
-- **Troubleshooting Guide**: Fixing 3D illustration consistency
+- **Troubleshooting Guide**: [AI Illustration Troubleshooting Guide](/blog/troubleshooting-guide) 
+- Build MightyLoka

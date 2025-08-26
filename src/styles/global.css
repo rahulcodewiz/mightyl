@@ -55,6 +55,43 @@
   padding: 0;
 }
 
+/* Dark mode cursor styles */
+* {
+  cursor: none; /* Hide default cursor */
+}
+
+/* Custom dark mode cursor */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 2px solid #333;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor.hover {
+  transform: scale(1.5);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* Fallback for systems that don't support custom cursors */
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    display: none;
+  }
+  
+  * {
+    cursor: auto;
+  }
+}
+
 html {
   font-size: var(--font-size-base);
   scroll-behavior: smooth;

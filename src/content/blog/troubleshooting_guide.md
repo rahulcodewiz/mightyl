@@ -31,13 +31,20 @@ When generating illustrations with AI, characters or settings may appear differe
 - **Problem:** Forest path looks different in each scene.  
 - **Cause:** Missing environmental details.  
 - **Solution:** Add repeated setting description for each prompt.  
-  **_Refine Prompt: Narrow forest path, twilight golden sunset, tall trees✅__**
+  **_Refine Prompt: Narrow forest path, twilight golden sunset, tall trees✅_**
 
 ## 5. Expression and Mood Variations  
 - **Problem:** Cow looks too aggressive in a sad scene.  
-- **Cause:** Missing emotional cue.  
+- **Cause:** Missing emotional sign.  
 - **Solution:** Add specific expression.  
   **_Refined Prompt:Cow with teary eyes, head bowed, gentle expression. ✅_**  
+
+## 6. Edit image in ChatGPT
+Edit an image in ChatGPT, simply click on the image and find the Select tool on the top-right corner of the window.
+![Edit Image in ChatGPT](image_edit.png)
+Select tool to select an area of the image and edit it with ChatGPT by describing changes explicitly in the prompt. 
+
+The prompt for above image :**No Red Tilak**
 
 ## Best Practices  
 - Create a **Character Style Guide** before starting. 
