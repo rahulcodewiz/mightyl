@@ -18,7 +18,8 @@ You will learn to:
 >>- A “Prompt Library” document to save your best prompts.
 >>- Simple naming rules (e.g., 01_scene_forest_twilight.png).
 
-## Customize ChatGPT
+## Getting Started 
+**Customize ChatGPT**
 - Sign in at chat.openai.com 
 - Go to Settings → Persona;ization → Custom Instructions
 - Answer the (What traits should ChatGPT have?) and (Anything else ChatGPT should know about you?)
@@ -44,7 +45,8 @@ Break the story into small, single-action scenes. each Scene = One illustration
 >>Cow walking alone on a narrow forest path at sunset
 
 **1.3 Design Character**
-
+Construct the prompt structure, avoid vague and leghty sentence. Use points Method.
+>**Example**
 >- Breed Style : Indigenous Indian cow 
 >- Color:  White coat with faint gray shading or warm light accents
 >- Eyes:  Large, soft, soulful brown eyes expressing calmness and purity
@@ -77,4 +79,7 @@ Draft the prompt with all the specifications like:
 
 *Example of a Pixar-style 3D illustration: A sad white cow walking on a forest path at twilight, with soft golden light filtering through tall trees - exactly matching the prompt example above*
 
-## References 
+## References
+
+- **OpenAI ChatGPT**: [chat.openai.com](https://chat.openai.com) - Primary AI tool for illustration prompts
+- **Troubleshooting Guide**: Fixing 3D illustration consistency
