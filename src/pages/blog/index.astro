@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 
 // Get all blog posts
 const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+const sortedPosts = posts.sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
 <Layout title="Blog - Mighty Loka" description="Read the latest stories and insights from Mighty Loka">
@@ -26,13 +26,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDa
                 <h2>{post.data.title}</h2>
                 <p class="post-excerpt">{post.data.description}</p>
                 <div class="post-meta">
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </time>
+                  {post.data.pubDate}
                   <div class="post-tags">
                     {post.data.tags.map(tag => (
                       <span class="tag">#{tag}</span>
