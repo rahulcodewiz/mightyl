@@ -5,6 +5,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'http://mightyloka.com',
   base: '/',
+  devToolbar: {
+  enabled: false
+},
   integrations: [],
   vite: {
     css: {

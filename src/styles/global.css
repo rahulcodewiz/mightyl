@@ -56,9 +56,11 @@
 }
 
 /* Dark mode cursor styles */
-* {
-  cursor: none; /* Hide default cursor */
+/* Ensure default cursor is shown */
+body, html, * {
+  cursor: auto !important;
 }
+/* Removed custom cursor override */
 
 /* Custom dark mode cursor */
 .cursor {
@@ -94,6 +96,7 @@
 
 html {
   font-size: var(--font-size-base);
+/* Removed custom cursor styles */
   scroll-behavior: smooth;
   font-family: var(--font-family);
   color: var(--text-color);
