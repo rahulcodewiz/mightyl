@@ -46,11 +46,11 @@ const currentYear = new Date().getFullYear();
         © {currentYear} MightyLoka. All rights reserved.
       </p>     </div>  
       <div>
-      <i class="fas fa-envelope"></i>
-      <a href="mailto:rashmimardur@gmail.com">rashmimardur@gmail.com</a>
-  
-      <i class="fas fa-phone"></i>
-      <a href="tel:+16046007696">+1 (604) 600-7696</a>
+      <a href="mailto:rashmimardur@gmail.com" aria-label="Email Rashmi Mardur" class="contact-link">
+        <i class="fas fa-envelope"></i>
+        <span class="sr-only">Email Rashmi Mardur</span>
+      </a>
+
       </div>
       <!--
       <div class="footer-social">
@@ -181,5 +181,28 @@ const currentYear = new Date().getFullYear();
       gap: 1rem;
       text-align: center;
     }
+  }
+
+  /* Visually hidden but accessible to screen readers */
+  .sr-only {
+    position: absolute !important;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap; /* added line */
+    border: 0; padding: 0; margin: -1px;
+  }
+
+  .contact-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .contact-link i {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
   }
 </style> 

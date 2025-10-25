@@ -41,7 +41,7 @@ const books = [
     title: 'Punyakoti: the Cow, the Tiger, and the Victory of truth',
     description: 'This timeless Indian tale  of integrity tells the story of a compassionate tiger, an honest cow shows that doing the right thing is not always easy and how truth and courage can change the world.',
     coverImage: './images/sample-pages/book3_page1.svg',
-    amazonUrl: 'https://www.amazon.ca/dp/B0FBG4GR2N',
+    amazonUrl: 'https://a.co/d/9kpAXLK',
     samplePages: [
       './images/sample-pages/book3_page1.svg',
       './images/sample-pages/book3_page2.svg',
@@ -81,8 +81,8 @@ const books = [
   },{
     title: 'Dasara: Navaratri Stories of Dolls, Goodness and Tradition',
     description: 'Celebrate Mysuru Dasara, a festival of stories, dolls, and traditions! From colorful Golu doll displays and royal processions in Mysore to the inspiring legends of Goddess Durga’s victory over Mahishasura, Dasara is a time of light, music, and togetherness. A perfect read-aloud for ages 4–11, this storybook invites children to:',
-    coverImage: './images/sample-pages/book4-page1.svg',
-    amazonUrl: 'https://www.amazon.ca/dp/B0FBG4GR2N',
+    coverImage: './images/book4-cover.jpg',
+    amazonUrl: 'https://a.co/d/aeyBA7b',
     samplePages: [
       './images/sample-pages/book4-page1.svg',
       './images/sample-pages/book4-page2.svg',
@@ -115,10 +115,8 @@ const books = [
           <div class="book-card" data-index={index}>
             <div class="book-cover">
               <img 
-                src={book.coverImage} 
+                src={book.coverImage}
                 alt={`Cover of ${book.title}`}
-                width="400"
-                height="600"
                 loading="lazy"
               />
               <div class="book-overlay">
@@ -395,7 +393,6 @@ const books = [
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
     width: 100%;
-    max-width: 400px;
     margin: 6rem 0 6rem auto;
     display: inline-block;
     background: transparent;
@@ -403,8 +400,9 @@ const books = [
 
   .book-cover img {
     width: 100%;
-    height: auto;
+    height: 100%; /* fill the fixed aspect-ratio box */
     display: block;
+    object-fit: contain; /* preserve SVG aspect while fitting into box */
     transition: transform 0.3s ease;
     background: transparent;
     position: relative;
