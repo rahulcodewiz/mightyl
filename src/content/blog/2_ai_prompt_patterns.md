@@ -112,7 +112,6 @@ Create a detailed character profile that you'll reuse across all illustrations. 
 <p>Pixar-style 3D semi-realistic, graceful white Indian cow with a pleasant, soft face, soulful brown eyes, slender but healthy build, expressing calmness and wisdom.</p>
 </div>
 
-<img src="/cow.png" alt="Pixar-style 3D Cow Character showcasing consistent design elements" style="width: 50%; height: 50%;">
 
 **Consistency Rules:**
 <ul class="checklist">
@@ -187,8 +186,7 @@ After lots of trial and error, I found this structure works consistently:
 <p>Pixar-style 3D illustration of a sad white cow walking on a forest path at twilight, with soft golden light filtering through tall trees, exactly matching the character design above. Focus on the cow's emotional expression, maintaining consistency with previous illustrations.</p>
 </div>
 
-<img src="cow_sad.png" alt="Sad White Cow Walking in Forest at Twilight" style="width: 50%; height: auto;">
-
+![Create Image Option in ChatGPT](/images/sample-pages/book3_page3.svg)
 ---
 
 ## Tips That Actually Helped Me
